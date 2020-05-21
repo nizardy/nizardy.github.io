@@ -85,7 +85,6 @@
       const greetText = variables.greetings[getTime()];
       const nickText = random(variables.nicknames);
       const tmpQuotes = random(Object.keys(variables.quotes));
-      const { quote, author } = variables.quotes[tmpQuotes];
       let textToWrite = [];
       // prettier-ignore
       variables.generated.map(function (text) {
@@ -96,7 +95,6 @@
         $("#bg").addClass(getMode(getTime()));
         generateTypeIt("#greeting", 100, true, textToWrite);
         generateTypeIt("#quotes", 120, false, quote);
-        $("#quotes-author").html(`- ${author}`);
         particlesJS("particles-js", particlesConfig, function () {
           console.log("callback - particles.js config loaded");
         });
