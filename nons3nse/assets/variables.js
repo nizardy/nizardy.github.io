@@ -8,12 +8,12 @@ const variables = {
   },
   quotes: [
     { quote: "I'm sorry for loving you.", author: "nons3nse" },
-    { quote: "I love you.", author: "nons3nse" },
-    { quote: "Aku sayang kamu!", author: "nons3nse" },
-    { quote: "Ardy sayang Dwii ♥", author: "nons3nse" },
-    { quote: "Love uuuu Yeooboooo", author: "nons3nse" },
+    { quote: "I just wanna say something. I Love U. That’s all.", author: "nons3nse" },
+    { quote: "Please be mine. Falling in love with you was completely out of my control", author: "nons3nse" },
+    { quote: "Ardy sayang hania ♥", author: "nons3nse" },
+    { quote: "I love u so ticcccc hania", author: "nons3nse" },
   ],
-  nicknames: ["Dwi", "Cintakuu", "Sayanngkuuuu", "Yeobooooo"],
+  nicknames: ["Hania", "Precious Girl", "Bby", "Babe"],
   generated: ["{greetings}, {nicknames}!"],
 };
 
