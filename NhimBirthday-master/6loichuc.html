@@ -1,0 +1,117 @@
+<html
+  __fvdsurfcanyoninserted="1"
+  class="
+        clickberry-extension
+        clickberry-extension-standalone
+        clickberry-extension
+        clickberry-extension-standalone
+        clickberry-extension
+        clickberry-extension-standalone
+    "
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 0. Phần icon của website (thay đổi link đến icon nếu bạn muốn sửa nó) -->
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="https://cdn.glitch.com/d38d5535-eac9-4b50-ae00-54747837eba1%2FbirthdayCake.png?v=1633253109986"
+    />
+
+    <!-- 1. Đây là phần title của website -->
+    <title>Happy Birthday</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script>
+      window.open = function() {};
+      window.print = function() {};
+      // Support hover state for mobile.
+      if (false) {
+        window.ontouchstart = function() {};
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="chrome-extension://bfbmjmiodbnnpllbbbfblcplfjjepjdn/js/injected.js"
+    ></script>
+    <meta content="clickberry-extension-here" />
+    <!--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1 -->
+    <style type="text/css">
+      #test {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        left: 0px;
+        animation-name: move_right;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+      }
+      @keyframes move_right {
+        0% {
+          left: 0px;
+        }
+        100% {
+          left: 500px;
+        }
+      }
+    </style>
+    <!--     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+  </head>
+
+  <body>
+    <link
+      href="https://fonts.googleapis.com/css?family=Wendy+One"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <a class="trangloi1" href="3hpbd.html">Quay lại</a>
+    <a class="trangloi2" href="index.html">Trang đầu</a>
+    <div id="test" onclick="loadSoundT()">
+      <img
+        src="https://cdn.glitch.me/7385dd4d-aab3-4f3a-8ec3-463db9f5dadd%2Fkisspng-clip-art-envelope-5a71463ce99b70.0409395215173729889569.png?v=1633858294734"
+        alt=""
+        class="avatar__img"
+        onclick="showMessage()"
+      />
+    </div>
+    <p class="chonngay" style="margin-top: 5cm">Có thư nè :>></p>
+
+
+    <audio id="player" src="sound/One%20Direction%20%20What%20Makes%20You%20Beautiful.mp3" autoplay loop>
+    </audio>
+
+    <script>
+      if (document.location.search.match(/type=embed/gi)) {
+        window.parent.postMessage("resize", "*");
+      }
+      function loadSoundT() {
+        var audio = new Audio('sound/tick.mp3');
+        audio.play();
+      }
+      function showMessage() {
+        swal({
+          title: "Lời nhắn",
+          text: "  .  Hôm nay, tuổi của em chuyển sang đầu số 2 rồi " +
+                  "có phải là cảm thấy đặc biệt lắm không?                " +
+                  "Xin trân trọng thông báo từ giờ Nhímm chính thức bước sang tuổi 2️⃣0️⃣ rồi, " +
+                  "không còn là trẻ con nữa nên là anh mong " +
+                  "những ngày sắp tới em sẽ trưởng thành hơn, chăm sóc bản thân tốt hơn, đừng nên thức khuya nựa." +
+                  " " +
+                  "Hôm nay là ngày của em, nên là em phải thật vuiii " +
+                  "và những ngày sau vẫn thế" +
+                  " đừng nên tiết kiệm nụ cười nhé :>." +
+                  // "vì em cười lên xinh lắm đó biết k? :>"+
+                  " Chúc những điều may mắn và tốt lành. ^^ 🍀🍀🌹🌹"
+          //"Iloveyou"
+          ,
+          button: {
+            text: "❤"
+          }
+        });
+      }
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </body>
+</html>
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->

@@ -1,0 +1,148 @@
+<html
+  __fvdsurfcanyoninserted="1"
+  class="
+        clickberry-extension
+        clickberry-extension-standalone
+        clickberry-extension
+        clickberry-extension-standalone
+        clickberry-extension
+        clickberry-extension-standalone
+    "
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 0. Phần icon của website (thay đổi link đến icon nếu bạn muốn sửa nó) -->
+    <link rel="shortcut icon" type="image/png" href="https://cdn.glitch.com/d38d5535-eac9-4b50-ae00-54747837eba1%2FbirthdayCake.png?v=1633253109986" />
+
+    <!-- 1. Đây là phần title của website -->
+    <title>Happy Birthday</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script>
+      window.open = function() {};
+      window.print = function() {};
+      // Support hover state for mobile.
+      if (false) {
+        window.ontouchstart = function() {};
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="chrome-extension://bfbmjmiodbnnpllbbbfblcplfjjepjdn/js/injected.js"
+    ></script>
+    <meta content="clickberry-extension-here" />
+  </head>
+
+  
+<body>
+    <link
+      href="https://fonts.googleapis.com/css?family=Wendy+One"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <p class="hopqua11">Của em tất :>></p>
+    <div>
+       <a onclick="loadSoundT()" href="3hpbd.html">
+          <img class="hopqua10"
+              src="img/hop10.png"
+             />
+      </a> 
+      <a  onclick="loadSoundF()">
+        <img  class="hopqua1"
+          src="img/Hop1.png"
+             onclick="showMessage4()"
+          /> 
+        <img class="hopqua4"
+             src="img/hop4.png"
+             onclick="showMessage3()"
+          />
+        <img class="hopqua8"
+             src="img/hop8.png"
+             onclick="showMessage2()"
+          />
+      </a>
+        <a onclick="loadSoundF()">
+          <img class="hopqua2"
+               src="img/Hop2.png"
+               onclick="showMessage2()"
+            />
+          <img class="hopqua5"
+               src="img/hop5.png"
+               onclick="showMessage4()"
+            />
+          <img class="hopqua9"
+               src="img/hop9.png"
+               onclick="showMessage3()"
+            />
+      </a>     
+        </a>
+        <a onclick="loadSoundF()">
+          <img class="hopqua3"
+               src="img/Hop3.png"
+               onclick="showMessage1()"
+          />
+          <img class="hopqua7"
+               src="img/hop7.png"
+               onclick="showMessage3()"
+          />
+          <img class="hopqua6"
+               src="img/hop6.png"
+               onclick="showMessage4()"
+          />
+      </a>  
+            
+  </div>
+        
+           <audio autoplay loop>
+                <source src="sound/BongoCat.mp3" type="audio/mp3">
+            </audio>
+
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+        function loadSoundF() {
+            var audio = new Audio('sound/duck.mp3');
+            audio.play();
+        }
+        function loadSoundT() {
+            var audio = new Audio('sound/tick.mp3');
+            audio.play();
+        }
+        function showMessage1() {
+            swal({
+                title: "Gì dậy chời, sai nữa hả?  🤣🤣🤣", // Tiêu đề của popup
+                button: {
+                    text: ":>"
+                },
+            });
+        }
+        function showMessage2() {
+            swal({
+                title: "Lêu lêu 😆😆😆",
+                button: {
+                    text: ":>"
+                },
+            });
+        }
+        function showMessage3() {
+          swal({
+            title: "Ôi là trời nhân phẩm kiểu gì ấy 😝😝😝",
+            button: {
+              text: "😂"
+            },
+          });
+        }
+        function showMessage4() {
+            swal({
+                title: "Hộp màu vàng mới đúng 😝😝",
+                button: {
+                    text: ":>",
+                },
+            });
+        }
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ 
+  </body>
+</html>
