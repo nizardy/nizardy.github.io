@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <center><marquee direction="up" scrollamount="2" align="center" behavior="alternate" width="90%"><marquee direction="right">play sound klik </marquee></marquee></center>
+  <title>Happy birthday to you </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">     
+<script src="sweetalert2.all.min.js"></script>
+<style>
+.button {
+    position:center;
+    display: inline-block;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    background: rgb(72, 214, 143);
+    color: rgba(109, 78, 78, 0.281);
+    border: 3px solid black;
+    border-radius: 0.5em;
+    font-size: 1.5em;
+    padding: 0 0.75em;
+    box-shadow: 10px 10px;
+  }
+  </style>
+</head>
+<body> 
+    <div class="button">
+<button id="footer-buttons" class="btn btn-warning btn-sm third"><span class="fa fa-music"></span><b>lihat hadiah kamu klik disini!<b></button>
+ <audio controls autoplay>
+    <source type="audio/mp3" src="HAPPY%20BIRTHDAY%20INSTRUMENTAL.mp3">
+    Sorry, your browser does not support HTML5 audio. </audio> </div>
+  <center><h2> ْبَارَكَ اللَّهُ فِي عُمْرِك </h2></center>
+<center><p> ْ"Semoga Allah memberkahi usiamu."</p></center>
+<script>
+/* Alert - patrocinio da musica  */ 
+document.querySelector(".third").addEventListener("click", function() {
+  swal({
+    title: "HAPPY BIRTHDAY TO YOU",
+    html:
+    'Hadiahnya ucapan aja ya Semoga panjang umur' +
+    '<a target="_blank" href="https://menuju2030.blogspot.com"> |sign2016</a> ' + '<a class="btn btn-success btn-xs" style="font-family:inherit;font-size:13px;color:#fff;border:none;" onClick="play()">Play/Pause</a> ',
+    
+    imageUrl: "https://c.tenor.com/T6IY2zkCkp0AAAAM/happy-birthday-dhieituaku.gif",
+    imageWidth: 550,
+    imageHeight: 225,
+    imageAlt: "Eagle Image",
+    showCancelButton: false,
+    confirmButtonText: 
+    '<i class="fa fa-thumbs-up"></i> Great!Thanks',
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+  cancelButtonText:
+    '<i class="fa fa-thumbs-down"></i>',
+  cancelButtonAriaLabel: 'Thumbs down',
+  });
+});
+</script>
+</body>
+</html>
