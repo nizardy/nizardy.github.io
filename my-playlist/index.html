@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Playlist - nons3nse.avi</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
+<body>
+    <div class="hero">
+        <div class="music">
+            <img src="media/otherside.jpg">
+            <div class="info">
+                <h1>Red Hot Chili Peppers - Otherside</h1>
+                <p>1999 • Album</p>
+                <div id="waveform"></div>
+                <div class="controls">
+                    <img src="media/play.png" id="playBtn">
+                    <img src="media/stop.png" id="stopBtn">
+                    <img src="media/volume.png" id="volumeBtn">
+                </div>
+            </div>
+        </div> 
+    </div>
+    <script>
+        
+        var playBtn = document.getElementById("playBtn");
+        var stopBtn = document.getElementById("stopBtn");
+        var volumeBtn = document.getElementById("volumeBtn");
+
+        var wavesurfer = WaveSurfer.create({
+                container: '#waveform',
+                waveColor: '#ffd0d2d2',
+                scrollParent: true,
+                progressColor: '#a18486d2',
+                cursorWidth: 1,
+                forceDecode: true,
+                barWidth: 4,
+                height: 150,
+                responsive: true,
+                hideScrollbar: true,
+                barRadius: 4
+                
+
+        });
+
+        wavesurfer.load('song/Red Hot Chili Peppers - Otherside.mp3');
+
+        playBtn.onclick = function(){
+            wavesurfer.playPause();
+            if(playBtn.src.includes("play.png"  )){
+                playBtn.src = "media/pause.png"
+            }else{
+                playBtn.src = "media/play.png";
+            }
+        }
+        stopBtn.onclick = function(){
+            wavesurfer.stop();
+            playBtn.src = "media/play.png";
+        }
+        volumeBtn.onclick = function(){
+            wavesurfer.toggleMute();
+            if(volumeBtn.src.includes("volume.png"  )){
+                volumeBtn.src = "media/mute.png"
+            }else{
+                volumeBtn.src = "media/volume.png";
+            }
+        }
+
+        wavesurfer.on('finish', function () {
+            playBtn.src = "media/play.png";
+            wavesurfer.stop();
+        });
+    </script>
+</body>
+
+
+
+
+</html>
