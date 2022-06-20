@@ -1,111 +1,82 @@
-* {
-    padding: 0;
-    margin: 0;
-    font-family: 'poppins', sans-serif;
-}
- 
-.container {
-    width: auto;
-    height: 100vh;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.37),#ffd0d2d2),url(../media/backround.jpg);
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist | nons3nse.avi</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
 
+<body>
+    <div class="container">
+        <div class="border"></div>
+        <img src="media/otherside.jpg">
+            <h1>Otherside</h1>
+                <h2>Red Hot Chili Peppers</h2>
+                    <p>1999 • Album</p>
+                    <div id="waveform"></div>
+                    <div class="controls">
+                        <img src="media/play.png" id="playBtn">
+                        <img src="media/stop.png" id="stopBtn">
+                        <img src="media/volume.png" id="volumeBtn">
+                    </div>
+    </div>
+    <script>
+        
+        var playBtn = document.getElementById("playBtn");
+        var stopBtn = document.getElementById("stopBtn");
+        var volumeBtn = document.getElementById("volumeBtn");
 
-.container img {
-    width: 350px;
-    height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 170px;
-    
-    
-}
+        var wavesurfer = WaveSurfer.create({
+                container: '#waveform',
+                waveColor: '#ffd0d2d2',
+                scrollParent: true,
+                progressColor: '#a18486d2',
+                cursorWidth: 1,
+                forceDecode: true,
+                barWidth: 4,
+                height: 128,
+                responsive: true,
+                hideScrollbar: true,
+                barRadius: 4
+});
+              
 
-.container h1 {
-    margin: 30px;
-    position: absolute;
-    top: 480px;
-    display: flex;
-    color: rgb(255, 255, 255);
-    
-}
+        wavesurfer.load('song/music.mp3');
 
-.container h2 {
-    margin: 30px;
-    position: absolute;
-    top: 520px;
-    font-weight: lighter;
-    font-size: 20px;
-    display: inline-block;
-    color: rgb(255, 255, 255);
-    
-}
+        playBtn.onclick = function(){
+            wavesurfer.playPause();
+            if(playBtn.src.includes("play.png"  )){
+                playBtn.src = "media/pause.png"
+            }else{
+                playBtn.src = "media/play.png";
+            }
+        }
+        stopBtn.onclick = function(){
+            wavesurfer.stop();
+            playBtn.src = "media/play.png";
+        }
+        volumeBtn.onclick = function(){
+            wavesurfer.toggleMute();
+            if(volumeBtn.src.includes("volume.png"  )){
+                volumeBtn.src = "media/mute.png"
+            }else{
+                volumeBtn.src = "media/volume.png";
+            }
+        }
 
-.container p {
-    margin: 30px;
-    position: absolute;
-    top: 570px;
-    display: inline-block;
-    color: rgb(255, 255, 255);
-    
-}
+        wavesurfer.on('finish', function () {
+            playBtn.src = "media/play.png";
+            wavesurfer.stop();
+        });
+    </script>
 
-#waveform {
-    position: absolute;
-    width: 350px;
-    bottom: 180px;
+</body>
 
-}
-
-
-.border {
-    width: 400px;
-    height: 700px;
-    padding: 30px;
-    border-radius: 15px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.616);
-    position: absolute;
-    top: 150px;
-}
-
-
-
-.controls {
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-}
-
-.controls img {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    top: 300px;
-    align-items: center;
-    padding: 30px;
-    
-}
-
-
-
-.footer {
-    position:absolute;
-    font-size: 0.8rem;
-    bottom:0;
-    width:100%;
-    height:30px;
-    text-align: center;
-    color: #5f5f5f;
-    cursor: pointer;
-  }
+<footer>
+    <div class="footer">
+      <a style="color:#5f5f5f;
+      text-decoration:none" 
+      href="https://www.instagram.com/nizar.dy/">&copy; nons3nse.avi | 2022</a>
+    </div>
+  </footer>
