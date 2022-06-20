@@ -16,12 +16,6 @@
     
 }
 
-#waveform {
-    position: absolute;
-    width: 350px;
-    bottom: 180px;
-
-}
 
 .container img {
     width: 350px;
@@ -63,6 +57,14 @@
     color: rgb(255, 255, 255);
     
 }
+
+#waveform {
+    position: absolute;
+    width: 350px;
+    bottom: 180px;
+
+}
+
 
 .border {
     width: 400px;
