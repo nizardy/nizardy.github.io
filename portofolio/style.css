@@ -29,11 +29,11 @@
 	background-color: white;
 }
 
+/* LOGO
 .navbar img{
 	width: 50px;
 	height: 50px;
-	margin: 10px;
-}
+} */
 .navbar-toggler{
 	border: none !important;
 }
@@ -242,6 +242,9 @@
 }
 .title-skills span{
 	color: var(--purple);
+}
+#skills .container-fluid .gambar-skills .col-lg-3{
+	padding-bottom: 3rem;
 }
 #skills .container-fluid .gambar-skills .col-lg-3{
 	padding-bottom: 3rem;
