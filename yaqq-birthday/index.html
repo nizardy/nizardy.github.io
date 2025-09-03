@@ -40,23 +40,17 @@
     .two { font-size: 1.2rem; font-weight: lighter; }
     .three { font-size: 3rem; }
 
-    /* === PERUBAHAN CSS UNTUK .four === */
-    .four {
-      /* Menggunakan position: fixed untuk lapisan fullscreen */
+    /* === CSS UNTUK .four & .ten === */
+    .four, .ten {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      
-      /* Flexbox untuk menengahkan isinya (phone-screen) */
       display: flex;
       justify-content: center;
       align-items: center;
-      
-      /* Memastikan ia tersembunyi sebelum animasi dimulai */
       visibility: hidden; 
-      
       z-index: 10;
     }
     
@@ -64,8 +58,8 @@
     .phone-screen {
         width: 100%;
         max-width: 420px;
-        height: 95vh;
-        max-height: 850px;
+        height: 90vh;
+        max-height: 800px;
         background-color: white;
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         border-radius: 20px;
@@ -75,19 +69,17 @@
     }
     .chat-background {
         background-color: #E5DDD5;
-        background-image: url('https://i.pinimg.com/73x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg');
+        background-image: url('https://i.pinimg.com/73x/8c/98/99/8c98994518b575bfd8c949e-91d20548b.jpg');
         background-repeat: repeat;
     }
     .chat-bubble-sent {
         position: relative;
-        /* justify-content: flex-end; /* Item akan tersusun di sisi kanan */
         background-color: #DCF8C6;
-        text-align: right; /* Perbaikan: Teks di dalam gelembung pesan rata kiri */
+        text-align: left; 
     }
     .chat-bubble-sent::after {
         content: '';
         position: absolute;
-        /* justify-content: flex-end; /* Item akan tersusun di sisi kanan */
         background-color: #DCF8C6;
         top: 0;
         right: -8px;
@@ -97,6 +89,24 @@
         border-width: 8px 0 0 10px;
         border-color: transparent transparent transparent #DCF8C6;
     }
+
+    .chat-bubble-received {
+        position: relative;
+        background-color: #ffffff;
+        text-align: left;
+    }
+    .chat-bubble-received::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 10px 0 0;
+        border-color: #ffffff transparent transparent transparent;
+    }
+
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
@@ -107,6 +117,14 @@
     .key-pressed {
         background-color: #B2B8BF !important;
         transform: scale(0.95);
+    }
+    
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
     /* === END UI WHATSAPP === */
 
@@ -120,22 +138,9 @@
     .six img.lydia-dp {
       display: inline-block;
       width: 400px;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 25px; 
-      border: 5px solid #fff;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+      height: auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
     }
-    .six .hat {
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      top: -75px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .hat::before { content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; background: #F1948A; border-radius: 50%; z-index: 2; }
-    .hat::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; clip-path: polygon(50% 10%, 0 100%, 100% 100%); background-color: #82E0AA; background-image: radial-gradient(#FAD7A0 25%, transparent 26%), radial-gradient(#AED6F1 25%, transparent 26%); background-size: 40px 40px; background-position: 0 0, 20px 20px; }
     .balloon { display: inline-block; width: 80px; height: 100px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; position: absolute; transform-origin: bottom center; }
     .balloon::before { content: ''; position: absolute; top: 10px; left: 10px; width: 30px; height: 40px; background-color: rgba(255, 255, 255, 0.4); border-radius: 50%; filter: blur(5px); transform: rotate(-30deg); }
     .balloon::after { content:""; position:absolute; bottom:-10px; left:50%; transform: translateX(-50%); width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 14px solid; }
@@ -153,9 +158,9 @@
     .wish-hbd { font-size: 3em; margin: 0; text-transform: uppercase; white-space: nowrap; }
     .wish h5 { font-weight: lighter; font-size: 1.2rem; margin: 10px 0 0; padding: 0 20px; }
     .nine p { font-size: 1.2rem; font-weight: lighter; padding: 0 20px; }
-    #replay { z-index: 3; cursor: pointer; font-weight: bold; text-decoration: underline; }
+    #replay { z-index: 3; cursor: pointer; font-weight: bold; text-decoration: underline; pointer-events: auto !important; }
+    .last-smile { font-size: 6rem; margin-top: 60px; }
 
-    /* New styles for the blackout screen */
     .dark-screen {
       position: fixed;
       top: 0;
@@ -198,22 +203,22 @@
 
     /* Media Queries */
     @media screen and (max-width: 768px) {
-      .one{font-size:3rem}.three{font-size:2rem}.five p{font-size:1.5rem}.five .idea-5{font-size:2.5rem}.idea-6 span{font-size:10rem}.wish-hbd{font-size:1.8em}.wish h5{font-size:1.1rem}.nine p{font-size:1.1rem}.six img.lydia-dp{width:300px;height:300px}.six .hat{width:120px;height:120px;top:-60px}
+      .one{font-size:3rem}.three{font-size:2rem}.five p{font-size:1.5rem}.five .idea-5{font-size:2.5rem}.idea-6 span{font-size:10rem}.wish-hbd{font-size:1.8em}.wish h5{font-size:1.1rem}.nine p{font-size:1.1rem}.six img.lydia-dp{width:300px;height:auto}.six .hat{width:120px;height:120px;top:-60px}
     }
     @media screen and (max-width: 500px) {
-      .container>div{top:15vh}.one{font-size:2.2rem}.two{font-size:1rem;padding:0 15px}.three{font-size:1.8rem}.phone-screen{height:90vh; border-radius:10px;}.five p{font-size:1.2rem;padding:0 10px}.five .idea-5{font-size:2.2rem}.idea-6 span{font-size:7rem}.six img.lydia-dp{width:250px;height:250px}.six .hat{width:100px;height:100px;top:-50px}.wish-hbd{font-size:1.2em}.wish h5,.nine p{font-size:1rem}
+      .container>div{top:15vh}.one{font-size:2.2rem}.two{font-size:1rem;padding:0 15px}.three{font-size:1.8rem}
+      .phone-screen{height:85vh; border-radius:10px;}
+      .five p{font-size:1.2rem;padding:0 10px}.five .idea-5{font-size:2.2rem}.idea-6 span{font-size:7rem}.six img.lydia-dp{width:250px;height:auto}.six .hat{width:100px;height:100px;top:-50px}.wish-hbd{font-size:1.2em}.wish h5,.nine p{font-size:1rem}
     }
   </style>
 </head>
 
 <body>
-  <!-- Tag audio untuk memutar musik -->
   <audio loop id="birthday-audio">
     <source src="John Denver.mp3" type="audio/mpeg">
     Browser Anda tidak mendukung tag audio.
   </audio>
 
-  <!-- New blackout screen element -->
   <div class="dark-screen">
     <p class="dark-screen-text">Ada yang matiin lampu nih...</p>
     <button id="turn-on-light-btn">Nyalakan Lampu</button>
@@ -231,8 +236,6 @@
       <p>it's your birthday!</p>
     </div>
 
-    <!-- UI WhatsApp sudah dipindahkan ke luar container -->
-
     <div class="five">
       <p class="idea-1">but then I realized, Aku sadar, ucapan kayak gitu is just not enough for you.</p>
       <p class="idea-2">Karena kamu bukan orang yang biasa,</p>
@@ -246,8 +249,7 @@
     </div>
 
     <div class="six">
-      <img src="https://i.imgur.com/wNfPr1R.jpeg" alt="Foto Eka" class="lydia-dp" id="imagePath">
-      <div class="hat"></div>
+      <img src="https://i.imgur.com/wNfPr1R.png" alt="Foto Eka" class="lydia-dp" id="imagePath">
       <div class="wish">
         <h3 class="wish-hbd">a very happy 21st birthday to you, yaqq!</h3>
         <h5 id="wishText">Sebagai a little gift, aku buatin ini untukmu. Sorry kalau websitenya masih simpel dan jauh dari kata sempurna, but it was made sincerely, from the heart. Hope you like it and have a great day today!</h5>
@@ -266,63 +268,56 @@
 
     <div class="nine">
       <p>My best wishes for you. Semoga di chapter baru ini kamu bisa shine even brighter, semua goals dan mimpimu tercapai, and always be surrounded by happiness.</p>
-      <p id="replay">Klik di sini untuk melihat lagi dari awal.</p>
+      <p id="replay" onclick="location.reload()">Klik di sini untuk melihat lagi dari awal.</p>
       <p class="last-smile">:)</p>
     </div>
   </div>
 
-  <!-- === PERUBAHAN STRUKTUR HTML: .four dipindah ke sini === -->
+  <!-- UI WhatsApp Pertama -->
   <div class="four">
       <div class="w-full max-w-md h-[800px] max-h-screen bg-white shadow-2xl rounded-lg flex flex-col overflow-hidden phone-screen">
-
-        <!-- Header Atas -->
         <header class="bg-[#F0F2F5] p-2 flex items-center shadow-sm z-10 flex-shrink-0">
             <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#54656F] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-                <img src="https://i.imgur.com/wNfPr1R.jpeg" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#54656F] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                <img src="https://i.imgur.com/1Pq5rec.jpeg" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
             </div>
             <div class="ml-3 flex-grow">
                 <h1 class="font-semibold text-gray-800 text-md">yaqq ⏦ﾟ♡︎</h1>
-                <p class="text-xs text-gray-500">Kirim pesan ke diri sendiri</p>
+                <p class="text-xs text-gray-500">online</p>
             </div>
             <div class="flex items-center space-x-4 text-[#54656F]">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
             </div>
         </header>
-
-        <!-- Area Obrolan -->
-        <main class="flex-1 overflow-y-auto p-4 chat-background relative no-scrollbar">
+        <main id="main-chat-1" class="flex-1 overflow-y-auto px-2 py-4 chat-background relative no-scrollbar">
             <div id="chat-area" class="flex flex-col space-y-2">
-                <div class="flex justify-center my-2">
-                    <span class="bg-[#e1f2fb] text-gray-700 text-xs font-semibold px-2 py-1 rounded-md">HARI INI</span>
-                </div>
+                <div class="flex justify-center my-2"><span class="bg-[#e1f2fb] text-gray-700 text-xs font-semibold px-2 py-1 rounded-md">HARI INI</span></div>
             </div>
         </main>
-
-        <!-- Area Input Pesan -->
-        <footer class="bg-[#F0F2F5] p-2 flex items-end space-x-2 flex-shrink-0">
-            <div class="flex-grow bg-white rounded-2xl flex items-center px-3 py-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <textarea id="message-input" rows="1" placeholder="Ketik pesan" class="flex-grow bg-transparent text-sm focus:outline-none ml-2 text-gray-700 resize-none overflow-y-hidden" style="max-height: 100px;"></textarea>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transform -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+        <footer class="bg-gray-100 p-2 flex items-center space-x-2 flex-shrink-0">
+            <button class="p-2 text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                </svg>
+            </button>
+            <div class="flex-grow bg-white rounded-2xl flex items-center px-4 py-1">
+                <textarea id="message-input" rows="1" placeholder="Ketik pesan" class="flex-grow bg-transparent text-base focus:outline-none text-gray-700 resize-none overflow-y-hidden" style="max-height: 120px;"></textarea>
+                <button class="p-1 text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                        <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
+                    </svg>
+                </button>
             </div>
-            <button id="action-button" class="bg-[#00A884] text-white w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-                <div id="mic-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
-                </div>
-                <div id="send-icon" class="hidden">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 text-white" fill="currentColor"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" /></svg>
-                </div>
+            <button id="action-button" class="bg-[#00A884] text-white w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-5 w-5 text-white" fill="currentColor">
+                   <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.949a.75.75 0 00.75.656h6.198a.75.75 0 010 1.5H4.443l-1.414 4.95a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+                </svg>
             </button>
         </footer>
-        
-        <!-- Keyboard (Visual Only) -->
-        <div class="bg-[#D2D5DA] w-full flex-shrink-0">
+         <div class="bg-[#D2D5DA] w-full flex-shrink-0">
             <div class="p-1.5 space-y-1.5 w-full pt-4">
                 <div class="flex justify-center w-full space-x-1.5">
                     <button data-key="q" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">q</button><button data-key="w" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">w</button><button data-key="e" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">e</button><button data-key="r" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">r</button><button data-key="t" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">t</button><button data-key="y" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">y</button><button data-key="u" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">u</button><button data-key="i" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">i</button><button data-key="o" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">o</button><button data-key="p" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">p</button>
@@ -333,7 +328,7 @@
                 <div class="flex justify-center w-full items-center space-x-1.5">
                     <button class="h-11 w-11 bg-[#B2B8BF] rounded-md flex items-center justify-center shadow"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" /></svg></button>
                     <button data-key="z" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">z</button><button data-key="x" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">x</button><button data-key="c" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">c</button><button data-key="v" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">v</button><button data-key="b" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">b</button><button data-key="n" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">n</button><button data-key="m" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">m</button>
-                    <button class="h-11 w-11 bg-[#B2B8BF] rounded-md flex items-center justify-center shadow"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12L12 14.25m-2.58-4.5H5.25a2.25 2.25 0 00-2.25 2.25v3.75a2.25 2.25 0 002.25 2.25h13.5a2.25 2.25 0 002.25-2.25v-3.75a2.25 2.25 0 00-2.25-2.25H16.5m-4.08 0a2.25 2.25 0 012.25-2.25h.01a2.25 2.25 0 012.25 2.25v.01a2.25 2.25 0 01-2.25 2.25h-.01a2.25 2.25 0 01-2.25-2.25v-.01z" /></svg></button>
+                    <button class="h-11 w-11 bg-[#B2B8BF] rounded-md flex items-center justify-center shadow"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12L12 14.25m-2.58-4.5H5.25a2.25 2.25 0 00-2.25 2.25v3.75a2.25 2.5 0 002.25 2.25h13.5a2.25 2.25 0 002.25-2.25v-3.75a2.25 2.25 0 00-2.25-2.25H16.5m-4.08 0a2.25 2.25 0 012.25-2.25h.01a2.25 2.25 0 012.25 2.25v.01a2.25 2.25 0 01-2.25 2.25h-.01a2.25 2.25 0 01-2.25-2.25v-.01z" /></svg></button>
                 </div>
                 <div class="flex justify-center w-full items-center space-x-1.5">
                     <button class="h-11 flex-[1.5] bg-[#B2B8BF] rounded-md flex items-center justify-center text-base font-medium shadow">123</button>
@@ -343,93 +338,139 @@
             </div>
         </div>
       </div>
-    </div>
+  </div>
+  
+  <!-- UI WhatsApp Kedua (Baru) -->
+  <div class="ten">
+      <div class="w-full max-w-md h-[800px] max-h-screen bg-white shadow-2xl rounded-lg flex flex-col overflow-hidden phone-screen">
+        <header class="bg-[#F0F2F5] p-2 flex items-center shadow-sm z-10 flex-shrink-0">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#54656F] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                <img src="https://i.imgur.com/1Pq5rec.jpeg" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+            </div>
+            <div class="ml-3 flex-grow">
+                <h1 class="font-semibold text-gray-800 text-md">yaqq ⏦ﾟ♡︎</h1>
+                <p class="text-xs text-gray-500">online</p>
+            </div>
+            <div class="flex items-center space-x-4 text-[#54656F]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
+            </div>
+        </header>
+        <main id="main-chat-2" class="flex-1 overflow-y-auto px-2 py-4 chat-background relative no-scrollbar">
+            <div id="chat-area-2" class="flex flex-col space-y-2">
+                <!-- Pesan baru akan muncul di sini -->
+            </div>
+        </main>
+        <footer class="bg-gray-100 p-2 flex items-center space-x-2 flex-shrink-0">
+            <button class="p-2 text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                </svg>
+            </button>
+            <div class="flex-grow bg-white rounded-2xl flex items-center px-4 py-1">
+                <textarea id="message-input-2" rows="1" placeholder="Ketik pesan" class="flex-grow bg-transparent text-base focus:outline-none text-gray-700 resize-none overflow-y-hidden" style="max-height: 120px;"></textarea>
+                <button class="p-1 text-gray-500">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                        <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
+                    </svg>
+                </button>
+            </div>
+            <button id="action-button-2" class="bg-[#00A884] text-white w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-5 w-5 text-white" fill="currentColor">
+                   <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.949a.75.75 0 00.75.656h6.198a.75.75 0 010 1.5H4.443l-1.414 4.95a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+                </svg>
+            </button>
+        </footer>
+         <div class="bg-[#D2D5DA] w-full flex-shrink-0">
+           <div class="p-1.5 space-y-1.5 w-full pt-4">
+                <div class="flex justify-center w-full space-x-1.5">
+                    <button data-key="q" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">q</button><button data-key="w" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">w</button><button data-key="e" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">e</button><button data-key="r" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">r</button><button data-key="t" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">t</button><button data-key="y" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">y</button><button data-key="u" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">u</button><button data-key="i" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">i</button><button data-key="o" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">o</button><button data-key="p" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">p</button>
+                </div>
+                <div class="flex justify-center w-full space-x-1.5 px-5">
+                    <button data-key="a" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">a</button><button data-key="s" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">s</button><button data-key="d" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">d</button><button data-key="f" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">f</button><button data-key="g" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">g</button><button data-key="h" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">h</button><button data-key="j" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">j</button><button data-key="k" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">k</button><button data-key="l" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">l</button>
+                </div>
+                <div class="flex justify-center w-full items-center space-x-1.5">
+                    <button class="h-11 w-11 bg-[#B2B8BF] rounded-md flex items-center justify-center shadow"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" /></svg></button>
+                    <button data-key="z" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">z</button><button data-key="x" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">x</button><button data-key="c" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">c</button><button data-key="v" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">v</button><button data-key="b" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">b</button><button data-key="n" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">n</button><button data-key="m" class="key h-11 flex-1 bg-white rounded-md flex items-center justify-center font-normal text-2xl shadow capitalize transition-all duration-100">m</button>
+                    <button class="h-11 w-11 bg-[#B2B8BF] rounded-md flex items-center justify-center shadow"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12L12 14.25m-2.58-4.5H5.25a2.25 2.25 0 00-2.25 2.25v3.75a2.25 2.5 0 002.25 2.25h13.5a2.25 2.25 0 002.25-2.25v-3.75a2.25 2.25 0 00-2.25-2.25H16.5m-4.08 0a2.25 2.25 0 012.25-2.25h.01a2.25 2.25 0 012.25 2.25v.01a2.25 2.25 0 01-2.25 2.25h-.01a2.25 2.25 0 01-2.25-2.25v-.01z" /></svg></button>
+                </div>
+                <div class="flex justify-center w-full items-center space-x-1.5">
+                    <button class="h-11 flex-[1.5] bg-[#B2B8BF] rounded-md flex items-center justify-center text-base font-medium shadow">123</button>
+                    <button data-key=" " class="key h-11 flex-[5] bg-white rounded-md flex items-center justify-center text-base font-medium shadow transition-all duration-100">Spasi</button>
+                    <button class="h-11 flex-[2.5] bg-[#B2B8BF] rounded-md flex items-center justify-center text-base font-medium shadow">Kembali</button>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   
   <script type="application/javascript">
     window.onload = () => {
-      // Setup Elemen GSAP
       const hbd = document.getElementsByClassName("wish-hbd")[0];
       hbd.innerHTML = `<span>${hbd.innerHTML.split("").join("</span><span>")}</span>`;
 
       const ideaTextTrans = { opacity: 0, y: -20, rotationX: 5, skewX: "15deg" };
       const ideaTextTransLeave = { opacity: 0, y: 20, rotationY: 5, skewX: "-15deg" };
 
-      // Setup Elemen WhatsApp
       const messageInput = document.getElementById('message-input');
-      const micIcon = document.getElementById('mic-icon');
-      const sendIcon = document.getElementById('send-icon');
       const chatArea = document.getElementById('chat-area');
-      const replayBtn = document.getElementById("replay");
       
       const fullMessage = 'Awalnya, aku mikir mau ngasih ucapan a basic birthday wish kayak, "Happy birthday to you! bla bla bla..."';
       
-      // Timeline GSAP Utama
-      const tl = new TimelineMax();
+      const tl = gsap.timeline();
 
-      // Perbaikan: Fungsi untuk auto-resize textarea
-      const autoResizeTextarea = () => {
-          messageInput.style.height = 'auto';
-          const scrollHeight = messageInput.scrollHeight;
-          const maxHeight = 100;
+      const autoResizeTextarea = (el) => {
+          el.style.height = 'auto';
+          const scrollHeight = el.scrollHeight;
+          const maxHeight = 120;
           if (scrollHeight > maxHeight) {
-              messageInput.style.height = maxHeight + 'px';
-              messageInput.style.overflowY = 'auto';
+              el.style.height = maxHeight + 'px';
+              el.style.overflowY = 'auto';
           } else {
-              messageInput.style.height = scrollHeight + 'px';
-              messageInput.style.overflowY = 'hidden';
+              el.style.height = scrollHeight + 'px';
+              el.style.overflowY = 'hidden';
           }
       }
 
-      // Perbaikan: Fungsi untuk menampilkan pesan terkirim (dari whatsapp1.html)
       const showSentMessage = () => {
         const messageBubbleHTML = `
          <div class="flex justify-end opacity-0 fade-in" style="animation-delay: 0.2s;">
             <div class="max-w-xs md:max-w-md">
-                <div class="chat-bubble-sent rounded-lg p-2 shadow-sm relative pr-10">
-                    <p class="text-sm text-gray-800">${fullMessage}</p>
+                <div class="chat-bubble-sent rounded-lg p-2 shadow-sm relative pr-12">
+                    <p class="text-sm text-gray-800 min-w-0">${fullMessage}</p>
                     <div class="absolute bottom-1 right-2 flex items-center space-x-1">
-                                <span class="text-[10px] text-gray-500">00.00</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-1.5 1.5a1 1 0 01-1.414-1.414l.793-.793-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" transform="translate(-4,0)"/>
-                                </svg>
-                            </div>
+                        <span class="text-[10px] text-gray-500">00.00</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-1.5 1.5a1 1 0 01-1.414-1.414l.793-.793-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" transform="translate(-4,0)"/></svg>
+                    </div>
                 </div>
             </div>
          </div>`;
+        const mainChat1 = document.getElementById('main-chat-1');
         chatArea.insertAdjacentHTML('beforeend', messageBubbleHTML);
-        chatArea.scrollTop = chatArea.scrollHeight;
+        mainChat1.scrollTop = mainChat1.scrollHeight;
         messageInput.value = "";
-        autoResizeTextarea();
-        micIcon.classList.remove('hidden');
-        sendIcon.classList.add('hidden');
+        autoResizeTextarea(messageInput);
       };
       
-      // Perbaikan: Fungsi untuk mengetik pesan secara otomatis
       const typeWriter = (onComplete) => {
         let charIndex = 0;
         const typingSpeed = 70;
-        
         function type() {
           if (charIndex < fullMessage.length) {
-            if (charIndex === 0) {
-              micIcon.classList.add('hidden');
-              sendIcon.classList.remove('hidden');
-            }
             const char = fullMessage.charAt(charIndex);
             messageInput.value += char;
-            autoResizeTextarea(); // Panggil auto-resize di sini
-            
+            autoResizeTextarea(messageInput);
             const keyToPress = char.toLowerCase();
-            const keyButton = document.querySelector(`[data-key='${keyToPress}']`);
+            const keyButton = document.querySelector(`.four [data-key='${keyToPress}']`);
             if (keyButton) {
               keyButton.classList.add('key-pressed');
-              setTimeout(() => {
-                keyButton.classList.remove('key-pressed');
-              }, 120);
+              setTimeout(() => { keyButton.classList.remove('key-pressed'); }, 120);
             }
             charIndex++;
             setTimeout(type, typingSpeed);
@@ -437,74 +478,138 @@
             setTimeout(() => {
               showSentMessage(fullMessage);
               if (onComplete) onComplete();
-            }, 500); // Tambahkan jeda 0.5s setelah mengetik untuk mengirim pesan
+            }, 500);
           }
         }
         type();
       };
       
-      // PERBAIKAN: Menambahkan skenario mati lampu sebelum alur utama
+      
+      const typeWriter2 = (message, onComplete) => {
+          const messageInput2 = document.getElementById('message-input-2');
+          const chatArea2 = document.getElementById('chat-area-2');
+          let charIndex = 0;
+          const typingSpeed = 70;
+
+          function showSentMessage2() {
+            const bubbleHTML = `<div class="flex justify-end opacity-0 fade-in" style="animation-delay: 0.2s;"><div class="max-w-xs md:max-w-md"><div class="chat-bubble-sent rounded-lg p-2 shadow-sm relative pr-12"><p class="text-sm text-gray-800 min-w-0">${message}</p><div class="absolute bottom-1 right-2 flex items-center space-x-1"><span class="text-[10px] text-gray-500">00.02</span><svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-1.5 1.5a1 1 0 01-1.414-1.414l.793-.793-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" transform="translate(-4,0)"/></svg></div></div></div></div>`;
+            const mainChat2 = document.getElementById('main-chat-2');
+            chatArea2.insertAdjacentHTML('beforeend', bubbleHTML);
+            mainChat2.scrollTop = mainChat2.scrollHeight;
+            messageInput2.value = "";
+            autoResizeTextarea(messageInput2);
+          }
+
+          function type() {
+              if (charIndex < message.length) {
+                  const char = message.charAt(charIndex);
+                  messageInput2.value += char;
+                  autoResizeTextarea(messageInput2);
+                  const keyToPress = char.toLowerCase();
+                  if (/^[a-z0-9 ]$/.test(keyToPress)) {
+                    const keyButton = document.querySelector(`.ten [data-key='${keyToPress}']`);
+                    if (keyButton) {
+                        keyButton.classList.add('key-pressed');
+                        setTimeout(() => { keyButton.classList.remove('key-pressed'); }, 120);
+                    }
+                  }
+                  charIndex++;
+                  setTimeout(type, typingSpeed);
+              } else {
+                  setTimeout(() => {
+                      showSentMessage2();
+                      if (onComplete) onComplete();
+                  }, 500);
+              }
+          }
+          type();
+      };
+      
+      const showNewMessages = (onComplete) => {
+          const messages = [
+              { text: "coba kamu dengerin lagunya" },
+              { text: "aku memilih 'Annie's Song' dari John Denver khusus buat km." },
+              { text: "pada pembukaan lagunya kamu bakal denger lirik pertamanya: 'You fill up my senses'." },
+              { text: "bagiku, kalimat itu sempurna untuk menggambarkan kehadiranmu yang membuat segalanya terasa lebih hidup, bukan cuma sekadar bahagia." },
+              { text: "jadi......" },
+              { text: "lagu ini bukan sekadar lagu, tapi caraku untuk selalu bilang: 'Kamu adalah keindahan, kedamaian, dan keajaiban buat aku." },
+              { text: "makasih yaaa sayangg, udah membuat duniaku jadi tempat yang jauh lebih baik" },
+              { text: "you feel like home" },
+              { text: "i love youuu sayanggkuuu cintaakuuu my princess Eka Septia Muliani dari kopangg" }
+          ];
+
+          let messageIndex = 0;
+
+          function processNextMessage() {
+              if (messageIndex >= messages.length) {
+                  gsap.delayedCall(1.5, onComplete);
+                  return;
+              }
+              const currentMessage = messages[messageIndex];
+              typeWriter2(currentMessage.text, () => {
+                  messageIndex++;
+                  setTimeout(processNextMessage, 500);
+              });
+          }
+          processNextMessage();
+      };
+
       const darkScreen = document.querySelector(".dark-screen");
       const turnOnBtn = document.getElementById("turn-on-light-btn");
       const birthdayAudio = document.getElementById("birthday-audio");
       
       turnOnBtn.addEventListener("click", () => {
-          // Play audio and fade out dark screen on first user interaction
           birthdayAudio.play();
-          
-          TweenMax.to(darkScreen, 1.5, {
+          gsap.to(darkScreen, {
+              duration: 1.5,
               opacity: 0,
               onComplete: () => {
                   darkScreen.style.display = 'none';
-                  // Start main animation timeline
                   tl
-                    .to(".container", 0.1, { visibility: "visible" })
-                    .from(".one", 0.7, { opacity: 0, y: 10 })
-                    .from(".two", 0.4, { opacity: 0, y: 10 })
-                    .to([".one", ".two"], 0.7, { opacity: 0, y: 10 }, "+=2.5")
-                    .from(".three", 0.7, { opacity: 0, y: 10 })
-                    .to(".three", 0.7, { opacity: 0, y: 10 }, "+=2")
-                    .from(".four", 0.7, { scale: 0.8, opacity: 0, autoAlpha: 0 }) // autoAlpha untuk visibility
-                    .call(typeWriter, [() => {
-                        // Tambahkan jeda 1.5 detik setelah pesan terkirim sebelum melanjutkan animasi utama
-                        TweenMax.delayedCall(1.5, () => {
-                            tl.resume();
+                    .to(".container", { duration: 0.1, visibility: "visible" })
+                    .from(".one", { duration: 0.7, opacity: 0, y: 10 })
+                    .from(".two", { duration: 0.4, opacity: 0, y: 10 })
+                    .to([".one", ".two"], { duration: 0.7, opacity: 0, y: 10 }, "+=2.5")
+                    .from(".three", { duration: 0.7, opacity: 0, y: 10 })
+                    .to(".three", { duration: 0.7, opacity: 0, y: 10 }, "+=2")
+                    .from(".four", { duration: 0.7, scale: 0.8, autoAlpha: 0 })
+                    .call(typeWriter, [() => { 
+                        gsap.delayedCall(2.0, () => {
+                           tl.resume();
                         });
                     }])
                     .addPause()
-                    .to(".four", 0.5, { scale: 0.8, opacity: 0, y: -250, ease: Power1.easeIn, autoAlpha: 0 }) // autoAlpha untuk visibility
-                    .from(".idea-1", 0.7, ideaTextTrans)
-                    .to(".idea-1", 0.7, ideaTextTransLeave, "+=1.5")
-                    .from(".idea-2", 0.7, ideaTextTrans)
-                    .to(".idea-2", 0.7, ideaTextTransLeave, "+=1.5")
-                    .from(".idea-3", 0.7, ideaTextTrans)
-                    .to(".idea-3 strong", 0.5, { scale: 1.2, x: 10, backgroundColor: "rgb(21, 161, 237)", color: "#fff" })
-                    .to(".idea-3", 0.7, ideaTextTransLeave, "+=1.5")
-                    .from(".idea-4", 0.7, ideaTextTrans)
-                    .to(".idea-4", 0.7, ideaTextTransLeave, "+=1.5")
-                    .from(".idea-5", 0.7, { rotationX: 15, rotationZ: -10, skewY: "-5deg", y: 50, z: 10, opacity: 0 }, "+=0.5")
-                    .to(".idea-5 span", 0.7, { rotation: 90, x: 8 }, "+=0.4")
-                    .to(".idea-5", 0.7, { scale: 0.2, opacity: 0 }, "+=2")
-                    .staggerFrom(".idea-6 span", 0.8, { scale: 3, opacity: 0, rotation: 15, ease: Expo.easeOut }, 0.2)
-                    .staggerTo(".idea-6 span", 0.8, { scale: 3, opacity: 0, rotation: -15, ease: Expo.easeOut }, 0.2, "+=1")
-                    .staggerFromTo(".baloons .balloon", 2.5, { opacity: 0.9, y: 1400 }, { opacity: 1, y: -1000 }, 0.2)
-                    .from(".lydia-dp", 0.5, { scale: 3.5, opacity: 0, x: 25, y: -25, rotationZ: -45 }, "-=2")
-                    .from(".hat", 0.5, { x: -100, y: 350, rotation: -180, opacity: 0 })
-                    .staggerFrom(".wish-hbd span", 0.7, { opacity: 0, y: -50, rotation: 150, skewX: "30deg", ease: Elastic.easeOut.config(1, 0.5) }, 0.1)
-                    .staggerFromTo(".wish-hbd span", 0.7, { scale: 1.4, rotationY: 150 }, { scale: 1, rotationY: 0, color: "#ff69b4", ease: Expo.easeOut }, 0.1, "party")
-                    .from(".wish h5", 0.5, { opacity: 0, y: 10, skewX: "-15deg" }, "party")
-                    .staggerTo(".eight svg", 1.5, { visibility: "visible", opacity: 0, scale: 80, repeat: 3, repeatDelay: 1.4 }, 0.3)
-                    .to(".six", 0.5, { opacity: 0, y: 30, zIndex: "-1" })
-                    .staggerFrom(".nine p", 1, ideaTextTrans, 1.2)
-                    .to(".last-smile", 0.5, { rotation: 90 }, "+=1");
+                    .to(".four", { duration: 0.5, scale: 0.8, y: -250, autoAlpha: 0, ease: "power1.in" })
+                    .from(".idea-1", { duration: 0.7, ...ideaTextTrans })
+                    .to(".idea-1", { duration: 0.7, ...ideaTextTransLeave }, "+=1.5")
+                    .from(".idea-2", { duration: 0.7, ...ideaTextTrans })
+                    .to(".idea-2", { duration: 0.7, ...ideaTextTransLeave }, "+=1.5")
+                    .from(".idea-3", { duration: 0.7, ...ideaTextTrans })
+                    .to(".idea-3 strong", { duration: 0.5, scale: 1.2, x: 10, backgroundColor: "rgb(21, 161, 237)", color: "#fff" })
+                    .to(".idea-3", { duration: 0.7, ...ideaTextTransLeave }, "+=1.5")
+                    .from(".idea-4", { duration: 0.7, ...ideaTextTrans })
+                    .to(".idea-4", { duration: 0.7, ...ideaTextTransLeave }, "+=1.5")
+                    .from(".idea-5", { duration: 0.7, rotationX: 15, rotationZ: -10, skewY: "-5deg", y: 50, z: 10, opacity: 0 }, "+=0.5")
+                    .to(".idea-5 span", { duration: 0.7, rotation: 90, x: 8 }, "+=0.4")
+                    .to(".idea-5", { duration: 0.7, scale: 0.2, opacity: 0 }, "+=2")
+                    .from(".idea-6 span", { duration: 0.8, scale: 3, opacity: 0, rotation: 15, ease: "expo.out", stagger: 0.2 })
+                    .to(".idea-6 span", { duration: 0.8, scale: 3, opacity: 0, rotation: -15, ease: "expo.out", stagger: 0.2 }, "+=1")
+                    .fromTo(".baloons .balloon", { opacity: 0.9, y: 1400 }, { duration: 2.5, opacity: 1, y: -1000, stagger: 0.2 })
+                    .from(".lydia-dp", { duration: 0.5, scale: 3.5, opacity: 0, x: 25, y: -25, rotationZ: -45 }, "-=2")
+                    .from(".wish-hbd span", { duration: 0.7, opacity: 0, y: -50, rotation: 150, skewX: "30deg", ease: "elastic.out(1, 0.5)", stagger: 0.1 })
+                    .fromTo(".wish-hbd span", { scale: 1.4, rotationY: 150 }, { duration: 0.7, scale: 1, rotationY: 0, color: "#ff69b4", ease: "expo.out", stagger: 0.1 }, "party")
+                    .from(".wish h5", { duration: 0.5, opacity: 0, y: 10, skewX: "-15deg" }, "party")
+                    .to(".eight svg", { duration: 3.0, visibility: "visible", opacity: 0, scale: 80, repeat: 0, stagger: 0.5 }, "+=1")
+                    .to([".six", ".seven", ".eight"], { duration: 0.7, autoAlpha: 0, y: 30, ease: "power1.in" }, "+=1.5")
+                    .from(".ten", { duration: 0.7, scale: 0.8, autoAlpha: 0 })
+                    .call(showNewMessages, [() => { tl.resume(); }])
+                    .addPause()
+                    .to(".ten", { duration: 0.7, scale: 0.8, autoAlpha: 0, y: -250, ease: "power1.in" })
+                    .from(".nine p", { duration: 1, ...ideaTextTrans, stagger: 1.2 })
+                    .to(".last-smile", { duration: 0.5, rotation: 90 }, "+=1");
               }
           });
       });
-      
-      replayBtn.addEventListener("click", () => {
-        location.reload(); 
-      });
-
     };
   </script>
 
