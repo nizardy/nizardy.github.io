@@ -56,6 +56,7 @@
     
     /* === UI WHATSAPP DARI REFERENSI === */
     .phone-screen {
+        transform: scale(0.85);
         width: 100%;
         max-width: 420px;
         height: 90vh;
@@ -157,9 +158,9 @@
     .eight svg:nth-child(1){top:7vh;left:5vw;fill:#bd6ecf}.eight svg:nth-child(2){top:23vh;left:35vw;fill:#7dd175}.eight svg:nth-child(3){top:33vh;left:23vw;fill:#349d8b}.eight svg:nth-child(4){top:43vh;left:57vw;fill:#347a9d}.eight svg:nth-child(5){top:68vh;left:7vw;fill:#c66053}.eight svg:nth-child(6){top:42vh;left:77vw;fill:#bfaa40}.eight svg:nth-child(7){top:68vh;left:83vw;fill:#e3bae8}.eight svg:nth-child(8){top:86vh;left:37vw;fill:#8762cb}.eight svg:nth-child(9){top:94vh;left:87vw;fill:#9a90da}
     .wish-hbd { font-size: 3em; margin: 0; text-transform: uppercase; white-space: nowrap; }
     .wish h5 { font-weight: lighter; font-size: 1.2rem; margin: 10px 0 0; padding: 0 20px; }
-    .nine p { font-size: 1.2rem; font-weight: lighter; padding: 0 20px; }
-    #replay { z-index: 3; cursor: pointer; font-weight: bold; text-decoration: underline; pointer-events: auto !important; }
-    .last-smile { font-size: 6rem; margin-top: 60px; }
+    .nine p { font-size: 1.2rem; font-weight: lighter; padding: 0 20px; margin-bottom: 20px; }
+    #replay { z-index: 3; cursor: pointer; font-weight: bold; text-decoration: underline; pointer-events: auto !important; margin-top: 20px; }
+    .last-smile { font-size: 6rem; margin-top: 20px; margin-bottom: 10px; }
 
     .dark-screen {
       position: fixed;
@@ -200,6 +201,33 @@
       box-shadow: 0 6px 8px rgba(0,0,0,0.2);
     }
     
+    /* === STYLING UNTUK JAM DIGITAL === */
+    #clock-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    .digital-clock {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 3rem;
+        font-weight: 400;
+        color: #2c3e50;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 10px 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    #reminder-text {
+        font-size: 1.1rem;
+        margin-top: 25px;
+    }
+    /* === END STYLING JAM === */
+
 
     /* Media Queries */
     @media screen and (max-width: 768px) {
@@ -209,6 +237,9 @@
       .container>div{top:15vh}.one{font-size:2.2rem}.two{font-size:1rem;padding:0 15px}.three{font-size:1.8rem}
       .phone-screen{height:85vh; border-radius:10px;}
       .five p{font-size:1.2rem;padding:0 10px}.five .idea-5{font-size:2.2rem}.idea-6 span{font-size:7rem}.six img.lydia-dp{width:250px;height:auto}.six .hat{width:100px;height:100px;top:-50px}.wish-hbd{font-size:1.2em}.wish h5,.nine p{font-size:1rem}
+      .digital-clock { font-size: 2.5rem; padding: 8px 20px; border-radius: 10px; }
+      #reminder-text { font-size: 1rem; margin-top: 20px; }
+      .last-smile { margin-top: 15px; font-size: 5rem; }
     }
   </style>
 </head>
@@ -238,11 +269,11 @@
 
     <div class="five">
       <p class="idea-1">but then I realized, Aku sadar, ucapan kayak gitu is just not enough for you.</p>
-      <p class="idea-2">Karena kamu bukan orang yang biasa,</p>
+      <p class="idea-2">karena kamu bukan orang yang biasa,</p>
       <p class="idea-3">you're someone
         <strong>SPECIAL</strong>.
       </p>
-      <p class="idea-4">Dan orang yang spesial</p>
+      <p class="idea-4">dan orang yang spesial</p>
       <p class="idea-5">pantas mendapatkan sesuatu yang lebih spesial juga.
         <span>:)</span>
       </p>
@@ -268,8 +299,12 @@
 
     <div class="nine">
       <p>My best wishes for you. Semoga di chapter baru ini kamu bisa shine even brighter, semua goals dan mimpimu tercapai, and always be surrounded by happiness.</p>
-      <p id="replay" onclick="location.reload()">Klik di sini untuk melihat lagi dari awal.</p>
       <p class="last-smile">:)</p>
+      <div id="clock-container">
+        <div id="digital-clock" class="digital-clock"></div>
+      </div>
+      <p id="reminder-text" class="text-sm md:text-base font-light px-4">Sekarang sudah larut, ayo sekarang udh waktunya tidur, ditunggu kado dari aku yaaa</p>
+      <p id="replay" onclick="location.reload()">Klik di sini untuk melihat lagi dari awal.</p>
     </div>
   </div>
 
@@ -412,6 +447,17 @@
   
   <script type="application/javascript">
     window.onload = () => {
+      // Fungsi untuk memicu haptic feedback
+      const triggerHapticFeedback = (pattern = 50) => {
+          if ('vibrate' in navigator) {
+              try {
+                  navigator.vibrate(pattern);
+              } catch (e) {
+                  console.warn("Haptic feedback is not supported or failed.", e);
+              }
+          }
+      };
+      
       const hbd = document.getElementsByClassName("wish-hbd")[0];
       hbd.innerHTML = `<span>${hbd.innerHTML.split("").join("</span><span>")}</span>`;
 
@@ -439,6 +485,7 @@
       }
 
       const showSentMessage = () => {
+        triggerHapticFeedback(40); // Haptic feedback saat pesan dikirim
         const messageBubbleHTML = `
          <div class="flex justify-end opacity-0 fade-in" style="animation-delay: 0.2s;">
             <div class="max-w-xs md:max-w-md">
@@ -485,13 +532,14 @@
       };
       
       
-      const typeWriter2 = (message, onComplete) => {
+      const typeWriter2 = (message, onComplete, hapticPattern) => {
           const messageInput2 = document.getElementById('message-input-2');
           const chatArea2 = document.getElementById('chat-area-2');
           let charIndex = 0;
           const typingSpeed = 70;
 
           function showSentMessage2() {
+            triggerHapticFeedback(hapticPattern); // Haptic feedback untuk setiap pesan baru
             const bubbleHTML = `<div class="flex justify-end opacity-0 fade-in" style="animation-delay: 0.2s;"><div class="max-w-xs md:max-w-md"><div class="chat-bubble-sent rounded-lg p-2 shadow-sm relative pr-12"><p class="text-sm text-gray-800 min-w-0">${message}</p><div class="absolute bottom-1 right-2 flex items-center space-x-1"><span class="text-[10px] text-gray-500">00.02</span><svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-1.5 1.5a1 1 0 01-1.414-1.414l.793-.793-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" transform="translate(-4,0)"/></svg></div></div></div></div>`;
             const mainChat2 = document.getElementById('main-chat-2');
             chatArea2.insertAdjacentHTML('beforeend', bubbleHTML);
@@ -527,14 +575,14 @@
       
       const showNewMessages = (onComplete) => {
           const messages = [
-              { text: "coba kamu dengerin lagunya" },
+              { text: "coba kamu dengerin lagunya‎ ‎ ‎ ‎ " },
               { text: "aku memilih 'Annie's Song' dari John Denver khusus buat km." },
               { text: "pada pembukaan lagunya kamu bakal denger lirik pertamanya: 'You fill up my senses'." },
               { text: "bagiku, kalimat itu sempurna untuk menggambarkan kehadiranmu yang membuat segalanya terasa lebih hidup, bukan cuma sekadar bahagia." },
-              { text: "jadi......" },
+              { text: "jadi‎ ‎ ‎ ‎ " },
               { text: "lagu ini bukan sekadar lagu, tapi caraku untuk selalu bilang: 'Kamu adalah keindahan, kedamaian, dan keajaiban buat aku." },
               { text: "makasih yaaa sayangg, udah membuat duniaku jadi tempat yang jauh lebih baik" },
-              { text: "you feel like home" },
+              { text: "you feel like home‎ ‎ ‎ ‎ " },
               { text: "i love youuu sayanggkuuu cintaakuuu my princess Eka Septia Muliani dari kopangg" }
           ];
 
@@ -546,12 +594,30 @@
                   return;
               }
               const currentMessage = messages[messageIndex];
+              const isLastMessage = messageIndex === messages.length - 1;
+              const hapticPattern = isLastMessage ? [100, 50, 100, 50, 200] : 50; // Pola khusus untuk pesan terakhir
+
               typeWriter2(currentMessage.text, () => {
                   messageIndex++;
                   setTimeout(processNextMessage, 500);
-              });
+              }, hapticPattern);
           }
           processNextMessage();
+      };
+
+      const runDigitalClock = () => {
+          const clockElement = document.getElementById('digital-clock');
+          
+          const updateClock = () => {
+              const now = new Date();
+              const hours = String(now.getHours()).padStart(2, '0');
+              const minutes = String(now.getMinutes()).padStart(2, '0');
+              const seconds = String(now.getSeconds()).padStart(2, '0');
+              clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+          };
+
+          setInterval(updateClock, 1000);
+          updateClock(); // Panggilan awal
       };
 
       const darkScreen = document.querySelector(".dark-screen");
@@ -559,6 +625,7 @@
       const birthdayAudio = document.getElementById("birthday-audio");
       
       turnOnBtn.addEventListener("click", () => {
+          triggerHapticFeedback(100); // Haptic feedback saat lampu dinyalakan
           birthdayAudio.play();
           gsap.to(darkScreen, {
               duration: 1.5,
@@ -586,6 +653,7 @@
                     .to(".idea-2", { duration: 0.7, ...ideaTextTransLeave }, "+=1.5")
                     .from(".idea-3", { duration: 0.7, ...ideaTextTrans })
                     .to(".idea-3 strong", { duration: 0.5, scale: 1.2, x: 10, backgroundColor: "rgb(21, 161, 237)", color: "#fff" })
+                    .call(triggerHapticFeedback, [150]) // Haptic feedback untuk "SPECIAL"
                     .to(".idea-3", { duration: 0.7, ...ideaTextTransLeave }, "+=1.5")
                     .from(".idea-4", { duration: 0.7, ...ideaTextTrans })
                     .to(".idea-4", { duration: 0.7, ...ideaTextTransLeave }, "+=1.5")
@@ -597,6 +665,7 @@
                     .fromTo(".baloons .balloon", { opacity: 0.9, y: 1400 }, { duration: 2.5, opacity: 1, y: -1000, stagger: 0.2 })
                     .from(".lydia-dp", { duration: 0.5, scale: 3.5, opacity: 0, x: 25, y: -25, rotationZ: -45 }, "-=2")
                     .from(".wish-hbd span", { duration: 0.7, opacity: 0, y: -50, rotation: 150, skewX: "30deg", ease: "elastic.out(1, 0.5)", stagger: 0.1 })
+                    .call(triggerHapticFeedback, [[50, 30, 100]]) // Haptic feedback untuk ucapan HBD
                     .fromTo(".wish-hbd span", { scale: 1.4, rotationY: 150 }, { duration: 0.7, scale: 1, rotationY: 0, color: "#ff69b4", ease: "expo.out", stagger: 0.1 }, "party")
                     .from(".wish h5", { duration: 0.5, opacity: 0, y: 10, skewX: "-15deg" }, "party")
                     .to(".eight svg", { duration: 3.0, visibility: "visible", opacity: 0, scale: 80, repeat: 0, stagger: 0.5 }, "+=1")
@@ -605,8 +674,12 @@
                     .call(showNewMessages, [() => { tl.resume(); }])
                     .addPause()
                     .to(".ten", { duration: 0.7, scale: 0.8, autoAlpha: 0, y: -250, ease: "power1.in" })
-                    .from(".nine p", { duration: 1, ...ideaTextTrans, stagger: 1.2 })
-                    .to(".last-smile", { duration: 0.5, rotation: 90 }, "+=1");
+                    .from(".nine > p:first-of-type", { duration: 1, ...ideaTextTrans })
+                    .from(".last-smile", { duration: 0.8, scale: 0.5, autoAlpha: 0, ease: "elastic.out(1, 0.5)" }, "+=0.2")
+                    .from("#clock-container", { duration: 0.8, y: 30, autoAlpha: 0 }, "+=0.3")
+                    .call(runDigitalClock)
+                    .from("#reminder-text", { duration: 0.8, y: 20, autoAlpha: 0 }, "+=0.2")
+                    .from("#replay", { duration: 0.8, y: 20, autoAlpha: 0 }, "+=0.3");
               }
           });
       });
