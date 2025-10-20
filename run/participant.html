@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Runner Tracker</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #e3f2fd;
+      margin: 0;
+      padding: 1.5rem;
+      color: #1a237e;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      color: #1565c0;
+    }
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #90caf9;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin: 1rem 0;
+      resize: vertical;
+      min-height: 80px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      background: #1976d2;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 1.2rem 0;
+    }
+    .btn:active { transform: scale(0.98); }
+    .status-box {
+      background: #bbdefb;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1rem;
+      font-family: monospace;
+    }
+    .coords { font-size: 1.1rem; font-weight: bold; }
+    .note {
+      font-size: 0.9rem;
+      color: #546e7a;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🏃‍♂️ Runner Tracker</h2>
+    <p>Masukkan ID peserta (pisahkan dengan koma):</p>
+    <textarea id="runnerIds" placeholder="Contoh: R001, R002, R003">R001, R002, R003, R004, R005</textarea>
+    
+    <button class="btn" onclick="startTracking()">▶️ Mulai Lacak Lokasi</button>
+
+    <div class="status-box">
+      <div>Status: <span id="status">Menunggu...</span></div>
+      <div>Lokasi GPS: <span class="coords" id="coords">–</span></div>
+      <div>Kecepatan: <span id="speed">–</span> km/h</div>
+    </div>
+
+    <p class="note">
+      • Izinkan akses lokasi saat diminta<br>
+      • Data disimpan lokal (offline)
+    </p>
+  </div>
+
+  <script>
+    let watchId = null;
+
+    function parseIds(input) {
+      return input.split(',').map(id => id.trim()).filter(id => id);
+    }
+
+    function startTracking() {
+      const input = document.getElementById('runnerIds').value;
+      const ids = parseIds(input);
+      if (ids.length === 0) return alert('Masukkan minimal 1 ID!');
+
+      if (!("geolocation" in navigator)) return alert('GPS tidak didukung.');
+
+      document.getElementById('status').textContent = 'Mengaktifkan GPS...';
+      document.getElementById('coords').textContent = '–';
+      document.getElementById('speed').textContent = '–';
+
+      watchId = navigator.geolocation.watchPosition(
+        (pos) => {
+          const { latitude, longitude, speed } = pos.coords;
+          const speedKmh = speed ? (speed * 3.6).toFixed(1) : "0.0";
+
+          // Tampilkan di UI
+          document.getElementById('coords').textContent = 
+            `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+          document.getElementById('speed').textContent = speedKmh;
+          document.getElementById('status').textContent = `✅ Melacak ${ids.length} peserta`;
+
+          // Simpan ke localStorage
+          ids.forEach(id => {
+            const offsetLat = (Math.random() - 0.5) * 0.00015;
+            const offsetLng = (Math.random() - 0.5) * 0.00015;
+            localStorage.setItem('runner_' + id, JSON.stringify({
+              lat: latitude + offsetLat,
+              lng: longitude + offsetLng,
+              speed: speedKmh,
+              timestamp: Date.now()
+            }));
+          });
+        },
+        (err) => {
+          console.error(err);
+          document.getElementById('status').textContent = '❌ Error GPS';
+          alert('Gagal akses lokasi. Pastikan izin diberikan.');
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (watchId) navigator.geolocation.clearWatch(watchId);
+    });
+  </script>
+</body>
+</html>
